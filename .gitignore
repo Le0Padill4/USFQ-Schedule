@@ -1,0 +1,13 @@
+# Entornos locales
+.env
+.env.*
+!.env.example
+.venv/
+__pycache__/
+.pytest_cache/
+node_modules/
+.next/
+coverage/
+dist/
+build/
+.DS_Store
