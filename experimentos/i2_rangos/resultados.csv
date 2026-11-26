@@ -1,0 +1,17 @@
+escenario,n,candidato,operaciones,consultas,repeticiones,mediana_ms,checksum
+consultas_90,1000,avl,400,360,3,1.5420,3780331
+consultas_90,1000,lista_ordenada,400,360,3,0.0983,3780331
+consultas_90,5000,avl,400,360,3,1.7585,19139535
+consultas_90,5000,lista_ordenada,400,360,3,0.1185,19139535
+consultas_90,10000,avl,400,360,3,1.9301,39072065
+consultas_90,10000,lista_ordenada,400,360,3,0.1587,39072065
+consultas_90,50000,avl,400,360,3,2.1342,190306440
+consultas_90,50000,lista_ordenada,400,360,3,0.4037,190306440
+consultas_10,1000,avl,400,40,3,1.0575,485492
+consultas_10,1000,lista_ordenada,400,40,3,0.1068,485492
+consultas_10,5000,avl,400,40,3,1.2326,2133560
+consultas_10,5000,lista_ordenada,400,40,3,0.3045,2133560
+consultas_10,10000,avl,400,40,3,1.4230,4439161
+consultas_10,10000,lista_ordenada,400,40,3,0.5844,4439161
+consultas_10,50000,avl,400,40,3,1.4787,18988420
+consultas_10,50000,lista_ordenada,400,40,3,2.5310,18988420
