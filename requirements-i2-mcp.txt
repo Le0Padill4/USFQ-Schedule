@@ -1,0 +1,3 @@
+-r requirements-i2-api.txt
+# FastMCP import is from the SDK v1 maintenance line; v2 uses a different API.
+mcp==1.30.0
