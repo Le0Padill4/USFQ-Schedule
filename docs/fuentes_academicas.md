@@ -16,10 +16,29 @@ optativas y electivas se incluyen según reglas verificadas, no por prefijo.
 Los hashes identifican las respuestas HTML de la consulta, no una versión
 oficial ni un archivo preservado. Ambas páginas muestran códigos, nombres,
 créditos y semestres sugeridos, y advierten que la malla está sujeta a cambios.
-Ambas muestran materias como ESP 1001 y MAT 1201. El HTML incluye controles de
-prerrequisitos y descripción para materias; el contenido y semántica de esos
-controles aún no se han verificado de forma completa. Una arista ausente no
-debe interpretarse como ausencia de requisitos.
+Ambas muestran materias como ESP 1001 y MAT 1201. Los controles de prerrequisitos
+y descripción funcionan en la muestra revisada, pero no se han inspeccionado
+todos ni se conocen todas sus semánticas. Una arista ausente no debe
+interpretarse como ausencia de requisitos.
+
+### Muestra de controles y reglas observadas
+
+- En ambas mallas, el control de prerrequisitos de CMP 3002 muestra CMP 2102,
+  Programación Avanzada en C++, con nota `C`. El control de descripción muestra
+  la descripción de Estructuras de Datos. Verificado manualmente en ambas
+  páginas el 25 nov 2026; no extrapolar esta única muestra a otras materias.
+- La guía de especialización de 1CMP indica tres optativas de nivel 2000 o
+  3000 de cualquier área de la universidad, siempre que se cumplan sus
+  prerrequisitos. La guía de 1MAC describe optativas de las áreas CMP, IIN,
+  ECN, MAT o IEE de nivel 3000 en adelante. La elegibilidad por materia sigue
+  requiriendo verificación; no son listas ya importadas.
+- En 1CMP el encabezado dice nueve semestres, pero la tabla también muestra un
+  verano para PAS 4000. Registrar esa estructura tal como aparece, sin inferir
+  equivalencia con el encabezado ni una discrepancia de créditos.
+- La sección de Colegio General de 1CMP documenta, entre otras condiciones,
+  nota mínima C para determinados requisitos y suficiencia de inglés por una
+  de varias vías. Son requisitos de graduación y no deben convertirse sin más
+  en prerrequisitos individuales de todas las materias.
 
 Contrastes disponibles: [PDF de bloques 1CMP](https://www.usfq.edu.ec/sites/default/files/2026-05/malla_de_bloques_ingenieria_en_ciencias_de_la_computacion_06052026.pdf),
 [PDF de bloques 1MAC](https://www.usfq.edu.ec/sites/default/files/2026-01/malla_de_bloques_ingenieria_en_matematicas_aplicadas_y_computacion.pdf),
