@@ -23,3 +23,12 @@ python3 -m venv .venv
 La prueba levanta el servidor como subproceso y usa un cliente MCP real por
 stdio. La ausencia de herramientas de escritura también se verifica. Cualquier
 sincronización requiere un contrato y permisos administrativos acordados.
+
+## Verificación adicional del 25 de noviembre
+
+En un worktree y entorno virtual aislados se instalaron las dependencias de
+`requirements-i2-mcp.txt` y se ejecutó `python -m unittest discover -s tests
+-p 'test_i2*.py' -v`: 2 pruebas correctas (API y cliente MCP real por stdio).
+La instalación produjo una advertencia de deprecación de Starlette sobre el
+uso de httpx con TestClient; requiere revisión de dependencias antes de
+congelarlas. Esta prueba no conecta PostgreSQL ni un servidor de red.
