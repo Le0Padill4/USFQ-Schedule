@@ -26,3 +26,6 @@ Validación local: la prueba pasó también en un entorno virtual recién creado
 con las dependencias anteriores. Starlette emitió una advertencia de que su
 integración `TestClient` con `httpx` está deprecada; debe revisarse al acordar
 versiones y dependencias del proyecto.
+
+Las versiones, licencias, mantenimiento y costos de las dependencias se
+registran en [dependencias de la API](dependencias_api.md).
