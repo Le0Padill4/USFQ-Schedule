@@ -57,6 +57,10 @@ class BoundedHeap:
             a[i], a[worst] = a[worst], a[i]
             i = worst
 
+    def threshold(self) -> int | None:
+        """Puntaje del peor resultado conservado si el heap esta lleno; si no, None."""
+        return self._a[0].score if len(self._a) == self.k else None
+
     def offer(self, item: ScheduleResult) -> None:
         if len(self._a) < self.k:
             self._a.append(item)

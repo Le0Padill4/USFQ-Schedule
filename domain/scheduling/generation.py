@@ -19,6 +19,8 @@ class Stats:
     nodes: int = 0
     conflict_checks: int = 0
     comparisons: int = 0
+    bounds: int = 0
+    pruned: int = 0
 
 
 def generate_exhaustive(problem: Problem, stats: Stats | None = None) -> list[tuple[str, ...]]:

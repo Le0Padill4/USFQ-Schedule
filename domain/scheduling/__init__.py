@@ -1,6 +1,6 @@
 """Generacion, validacion y ranking de horarios (Integrante 3)."""
 
-from .engine import GENERATORS, SELECTORS, generate_schedules
+from .engine import GENERATORS, SELECTORS, best_schedules, generate_schedules
 from .errors import ErrorCode, ScheduleError
 from .generation import Stats, generate_backtracking, generate_csp, generate_exhaustive
 from .models import (
@@ -11,6 +11,12 @@ from .models import (
     Offering,
     meetings_overlap,
     offerings_conflict,
+)
+from .optimize import (
+    METHODS,
+    best_schedules_all,
+    best_schedules_bnb,
+    score_upper_bound,
 )
 from .request import (
     SUPPORTED_CAREERS,
@@ -27,6 +33,7 @@ from .topk import BoundedHeap, top_k_heap, top_k_sort
 __all__ = [
     "DAYS_PER_WEEK",
     "GENERATORS",
+    "METHODS",
     "MINUTES_PER_DAY",
     "SELECTORS",
     "SUPPORTED_CAREERS",
@@ -44,6 +51,9 @@ __all__ = [
     "ScoreTerm",
     "Slot",
     "Stats",
+    "best_schedules",
+    "best_schedules_all",
+    "best_schedules_bnb",
     "build_problem",
     "generate_backtracking",
     "generate_csp",
@@ -53,6 +63,7 @@ __all__ = [
     "offerings_conflict",
     "rank_key",
     "score_schedule",
+    "score_upper_bound",
     "top_k_heap",
     "top_k_sort",
 ]
