@@ -21,3 +21,11 @@ invariantes tras cada paso; no es la comparación de 10.000 operaciones del moto
 completo que exige CMP3002. No se ha realizado benchmark.
 
 Prueba: `python3 -m unittest discover -s tests -p 'test_i2_avl.py' -v`.
+
+## Continuidad del 25 de noviembre
+
+El PR #6 tiene un flujo `i2-python` que ejecuta unittest y compileall; pasó en
+GitHub Actions. Se solicitó revisión a I1 e I3; sigue en borrador. El check
+obligatorio `docs` depende del PR #5 y aún no aparece en este PR. Los PR #10,
+#13 y #14 conservan la base AVL; cambiarlos a main solo cuando #6 se integre,
+revisando su historial y pruebas. No se ha fusionado ningún PR.
