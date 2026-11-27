@@ -13,6 +13,8 @@ from pathlib import Path
 from .common import read_csv
 
 STYLE = {
+    "todos_topk": ("#257de0", "o"),
+    "branch_and_bound": ("#f47230", "^"),
     "exhaustiva": ("#6a4ce2", "s"),
     "backtracking": ("#257de0", "o"),
     "csp": ("#f47230", "^"),
@@ -20,6 +22,11 @@ STYLE = {
     "ordenamiento": ("#f47230", "^"),
 }
 METRICS = {
+    "mejores_k": [
+        ("time_ms_median", "Tiempo (ms)", True),
+        ("nodes", "Nodos visitados", False),
+        ("conflict_checks", "Comparaciones de cruce", False),
+    ],
     "generacion": [
         ("time_ms_median", "Tiempo (ms)", True),
         ("nodes", "Nodos visitados", False),
@@ -32,10 +39,12 @@ METRICS = {
     ],
 }
 TITLES = {
+    "mejores_k": "Mejores K horarios: tiempo y pasos",
     "generacion": "Generación de horarios: tiempo y pasos",
     "topk": "Top-K: tiempo, comparaciones y memoria",
 }
 XLABEL = {"generacion": "Tamaño (combinaciones del espacio de búsqueda)",
+          "mejores_k": "Tamaño (combinaciones del espacio de búsqueda)",
           "topk": "Tamaño (N resultados)"}
 
 

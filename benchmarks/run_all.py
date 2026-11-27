@@ -5,7 +5,7 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
-from . import bench_generation, bench_topk
+from . import bench_best_k, bench_generation, bench_topk
 from .common import DEFAULT_SEED, write_environment
 
 
@@ -16,20 +16,31 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--seed", type=int, default=DEFAULT_SEED)
     ap.add_argument("--quick", action="store_true", help="tamanos reducidos para una prueba rapida")
     ap.add_argument("--no-plot", action="store_true", help="solo CSV, sin graficos")
+    ap.add_argument("--only", default="mejores_k,generacion,topk",
+                    help="subconjunto separado por comas: mejores_k, generacion, topk")
     args = ap.parse_args(argv)
 
     gen_sizes = bench_generation.QUICK_SIZES if args.quick else bench_generation.FULL_SIZES
     topk_sizes = bench_topk.QUICK_SIZES if args.quick else bench_topk.FULL_SIZES
     write_environment(args.out, repeats=args.repeats, seed=args.seed, quick=args.quick)
-    print("generacion...", flush=True)
-    bench_generation.run(args.out, sizes=gen_sizes, repeats=args.repeats, seed=args.seed)
-    print("topk...", flush=True)
-    bench_topk.run(args.out, sizes=topk_sizes, repeats=args.repeats, seed=args.seed)
+    only = [s.strip() for s in args.only.split(",") if s.strip()]
+    unknown = set(only) - {"mejores_k", "generacion", "topk"}
+    if unknown:
+        ap.error(f"--only desconocido: {sorted(unknown)}")
+    if "mejores_k" in only:
+        print("mejores_k...", flush=True)
+        bench_best_k.run(args.out, sizes=gen_sizes, repeats=args.repeats, seed=args.seed)
+    if "generacion" in only:
+        print("generacion...", flush=True)
+        bench_generation.run(args.out, sizes=gen_sizes, repeats=args.repeats, seed=args.seed)
+    if "topk" in only:
+        print("topk...", flush=True)
+        bench_topk.run(args.out, sizes=topk_sizes, repeats=args.repeats, seed=args.seed)
     if not args.no_plot:
         try:
             from .plot import plot_operation
 
-            for op in ("generacion", "topk"):
+            for op in [o for o in ("mejores_k", "generacion", "topk") if o in only]:
                 print("grafico:", plot_operation(op, args.out))
         except ImportError:
             print("matplotlib no esta instalado: se omiten los graficos "

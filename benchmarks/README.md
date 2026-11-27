@@ -1,11 +1,12 @@
 # Benchmarks de I3
 
-Dos operaciones, cada una con candidatos que resuelven **exactamente el mismo problema** y
+Operaciones medidas, cada una con candidatos que resuelven **exactamente el mismo problema** y
 devuelven resultados equivalentes (el arnes lo comprueba antes de medir y falla si difieren).
 
 | Operacion | Candidatos | Escenarios |
 |---|---|---|
-| Generacion de todos los horarios factibles | exhaustiva, backtracking con poda, CSP (forward checking + MRV) | `pocos_cruces`, `muchos_cruces`, `cruces_extremos` |
+| **Mejores K horarios** | generar todos (CSP) + Top-K con heap, frente a branch and bound con cota optimista | `preferencias_fuertes_k10`, `sin_preferencias_k10`, `preferencias_fuertes_k_grande`, `solo_huecos_k10` |
+| Generacion de todos los horarios factibles (evidencia complementaria) | exhaustiva, backtracking con poda, CSP (forward checking + MRV) | `pocos_cruces`, `muchos_cruces`, `cruces_extremos` |
 | Top-K de resultados puntuados | heap acotado propio, ordenamiento completo | `k10_aleatorio`, `k_decimo_aleatorio`, `k_decimo_ascendente`, `flujo_10_consultas` |
 
 Tamanos completos: 10^3, 10^4, 10^5 y 10^6 (combinaciones del espacio de busqueda en
@@ -22,10 +23,14 @@ python -m benchmarks.run_all
 
 - `--quick`: tamanos reducidos (unos 20 s) para comprobar que todo funciona; usar `--out OTRA_CARPETA`
   para no mezclar con los resultados oficiales.
+- `--only mejores_k,generacion,topk`: ejecuta solo parte (util para repetir una operacion).
 - `--no-plot`: solo CSV. `--repeats N` (por defecto 5). `--seed S` (por defecto 20261127).
 
-Salida en `benchmarks/results/`: `generacion_raw.csv`, `generacion_summary.csv`, `topk_raw.csv`,
-`topk_summary.csv`, `generacion.png`, `topk.png` y `environment.json`.
+Salida en `benchmarks/results/`: `<operacion>_raw.csv`, `<operacion>_summary.csv` y `<operacion>.png`
+para `mejores_k`, `generacion` y `topk`, mas `environment.json`.
+
+La corrida completa con 5 repeticiones puede tardar de 15 a 25 minutos segun el equipo
+(`--repeats 3` la acorta). Para repetir una sola operacion, usa `--only`.
 
 ## Metodologia
 

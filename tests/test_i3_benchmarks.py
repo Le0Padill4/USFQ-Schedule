@@ -4,7 +4,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from benchmarks import bench_generation, bench_topk
+from benchmarks import bench_best_k, bench_generation, bench_topk
 
 
 def read(path):
@@ -27,6 +27,18 @@ class BenchmarkHarnessTests(unittest.TestCase):
         for r in summary:
             by_key.setdefault((r["scenario"], r["size"]), set()).add(r["result_count"])
         self.assertTrue(all(len(v) == 1 for v in by_key.values()))  # mismos resultados
+
+    def test_mejores_k_produce_csv_con_pasos_de_poda(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            bench_best_k.run(Path(tmp), sizes={1000: 3, 10_000: 4}, repeats=1, seed=1)
+            summary = read(Path(tmp) / "mejores_k_summary.csv")
+        self.assertEqual(len(summary), len(bench_best_k.SCENARIOS) * 2 * 2)
+        strong = [r for r in summary if r["scenario"] == "preferencias_fuertes_k10"
+                  and r["candidate"] == "branch_and_bound"]
+        self.assertTrue(all(int(r["pruned"]) > 0 for r in strong))
+        tie = [r for r in summary if r["scenario"] == "sin_preferencias_k10"
+               and r["candidate"] == "branch_and_bound"]
+        self.assertTrue(all(int(r["pruned"]) == 0 for r in tie))
 
     def test_topk_produce_csv_con_pasos_y_memoria(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -53,7 +65,8 @@ class BenchmarkHarnessTests(unittest.TestCase):
             out = Path(tmp)
             bench_generation.run(out, sizes={100: 2, 1000: 3}, repeats=1, seed=1)
             bench_topk.run(out, sizes=(200, 400), repeats=1, seed=1)
-            for op in ("generacion", "topk"):
+            bench_best_k.run(out, sizes={1000: 3, 10_000: 4}, repeats=1, seed=1)
+            for op in ("mejores_k", "generacion", "topk"):
                 self.assertTrue(plot_operation(op, out).stat().st_size > 1000)
 
 
