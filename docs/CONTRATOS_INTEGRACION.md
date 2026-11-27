@@ -25,3 +25,16 @@ La API no devuelve cupos o NRC inventados. Fechas, zona horaria, paginación y o
 ## Contratos internos
 
 `CourseGraph` valida aristas y produce habilitadas/orden topológico. `CourseAVL` indexa código y rangos. `ScheduleGenerator` solo consume candidatos cuyos prerrequisitos se cumplan y entrega combinaciones sin conflictos. MCP llama casos de uso de consulta; no escribe datos ni ejecuta consultas arbitrarias.
+
+## Propuesta de adaptador grafo–índice (pendiente de acuerdo)
+
+`eligible_course_records(graph, index, passed_codes)` combina los códigos
+habilitados por `CourseGraph` con sus registros en `CourseIndex`, en el orden
+que devuelve el grafo. Conserva las reglas AND y la exclusión conservadora de
+requisitos desconocidos. Si una materia habilitada no está en el índice, falla
+con `KeyError` en lugar de omitirla. Los errores de códigos aprobados se
+propagan desde el grafo. Devuelve pares `(code, record)`; los registros son
+referencias, no copias. Es una consulta sin escrituras, no una garantía de
+sincronización global entre estructuras, ni implementa OR, correquisitos,
+versiones, ofertas o el generador. El equipo debe acordar el modelo final de
+`EligibleCourse` y la política de transacciones antes de conectar consumidores.
