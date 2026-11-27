@@ -10,9 +10,13 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from domain.scheduling import EligibleCourse, ErrorCode, Offering, ScheduleError
-
-SUPPORTED_CAREERS = ("1CMP", "1MAC")
+from domain.scheduling import (
+    SUPPORTED_CAREERS,
+    EligibleCourse,
+    ErrorCode,
+    Offering,
+    ScheduleError,
+)
 
 
 @dataclass(frozen=True)
