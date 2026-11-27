@@ -1,0 +1,31 @@
+name: validate
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  docs:
+    name: docs
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check required continuity and PAA documents
+        run: |
+          python - <<'PYCODE'
+          from pathlib import Path
+          required = [
+              "AGENTS.md", "README.md", "docs/PLAN_MAESTRO.md",
+              "docs/arquitectura.md", "docs/CONTRATOS_INTEGRACION.md",
+              "docs/DIVISION_TRABAJO.md", "docs/ESTADO_PROYECTO.md",
+              "docs/planes/INTEGRANTE_1.md", "docs/planes/INTEGRANTE_2.md",
+              "docs/planes/INTEGRANTE_3.md", "spec/spec.md",
+          ]
+          missing = [name for name in required if not Path(name).is_file()]
+          if missing:
+              raise SystemExit("Required docs missing: " + ", ".join(missing))
+          PYCODE
