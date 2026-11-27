@@ -32,3 +32,6 @@ En un worktree y entorno virtual aislados se instalaron las dependencias de
 La instalación produjo una advertencia de deprecación de Starlette sobre el
 uso de httpx con TestClient; requiere revisión de dependencias antes de
 congelarlas. Esta prueba no conecta PostgreSQL ni un servidor de red.
+
+Véase [dependencia MCP](dependencias_mcp.md) para versión, licencia,
+mantenimiento, costo y los enlaces a las dependencias de la API.
