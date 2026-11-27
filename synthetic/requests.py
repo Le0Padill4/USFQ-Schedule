@@ -65,6 +65,10 @@ def random_request(
         preferred_ranges=tuple(_rand_meeting(rng) for _ in range(rng.choice((0, 1, 2)))),
         avoided_ranges=tuple(_rand_meeting(rng) for _ in range(rng.choice((0, 1)))),
     )
+    if rng.random() < 0.5:  # pesos arbitrarios: negativos, cero y grandes
+        w = {name: rng.randint(-5, 15) for name in (
+            "w_free_day", "w_days", "w_gaps", "w_preferred", "w_avoided", "w_priority")}
+        prefs = replace(prefs, **w)
     req = ScheduleRequest(
         term=catalog.term,
         career_id=career,

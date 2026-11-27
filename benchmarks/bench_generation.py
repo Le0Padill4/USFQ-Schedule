@@ -28,7 +28,7 @@ from .common import DEFAULT_SEED, summarize, time_runs, write_csv
 
 SECTIONS = 10
 FULL_SIZES = {1_000: 3, 10_000: 4, 100_000: 5, 1_000_000: 6}  # combinaciones -> materias
-QUICK_SIZES = {100: 2, 1_000: 3, 10_000: 4, 100_000: 5}
+QUICK_SIZES = {1_000: 3, 10_000: 4, 100_000: 5}
 SCENARIOS = {"pocos_cruces": 110, "muchos_cruces": 10, "cruces_extremos": 4}  # franjas
 CANDIDATES = {
     "exhaustiva": generate_exhaustive,
@@ -43,7 +43,9 @@ def slot_pool(seed: int, size: int) -> list[tuple[int, int]]:
     return slots[:size]
 
 
-def build_instance(n_courses: int, pool_size: int, seed: int):
+def build_instance(
+    n_courses: int, pool_size: int, seed: int, preferences=None, max_results: int = 10
+):
     """Instancia sintetica: ``n_courses`` materias requeridas con SECTIONS paralelos cada una."""
     rng = random.Random(f"gen-{seed}-{n_courses}-{pool_size}")
     pool = slot_pool(seed, pool_size)
@@ -62,8 +64,10 @@ def build_instance(n_courses: int, pool_size: int, seed: int):
                          tuple(sorted(meetings)), "fixture-sintetico", "2026-11-27")
             )
         eligible.append(EligibleCourse(f"SYN-B{c}", 3, tuple(offs)))
+    kwargs = {} if preferences is None else {"preferences": preferences}
     request = ScheduleRequest(
-        "SYN-T1", "1CMP", required_courses=tuple(e.course_code for e in eligible)
+        "SYN-T1", "1CMP", required_courses=tuple(e.course_code for e in eligible),
+        max_results=max_results, **kwargs,
     )
     return build_problem(request, eligible)
 
