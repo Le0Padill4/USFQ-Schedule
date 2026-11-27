@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="940" height="390" viewBox="0 0 940 390">
+<rect width="100%" height="100%" fill="white"/>
+<text x="30" y="28" font-family="sans-serif" font-size="17">Bajas: mediana del lote (ms; escala logarítmica)</text>
+<text x="60" y="60" font-family="sans-serif" font-size="13">bajas_inicio</text>
+<path d="M60,75 V315 H420" fill="none" stroke="#333"/>
+<text x="52" y="319.0" text-anchor="end" font-family="sans-serif" font-size="10">0.02</text>
+<text x="52" y="239.0" text-anchor="end" font-family="sans-serif" font-size="10">0.09</text>
+<text x="52" y="159.0" text-anchor="end" font-family="sans-serif" font-size="10">0.39</text>
+<text x="52" y="79.0" text-anchor="end" font-family="sans-serif" font-size="10">1.78</text>
+<text x="60.0" y="333" text-anchor="middle" font-family="sans-serif" font-size="10">1000</text>
+<text x="180.0" y="333" text-anchor="middle" font-family="sans-serif" font-size="10">5000</text>
+<text x="300.0" y="333" text-anchor="middle" font-family="sans-serif" font-size="10">10000</text>
+<text x="420.0" y="333" text-anchor="middle" font-family="sans-serif" font-size="10">50000</text>
+<polyline points="60.0,171.8 180.0,160.4 300.0,144.4 420.0,140.6" fill="none" stroke="#1565c0" stroke-width="2"/>
+<polyline points="60.0,290.8 180.0,236.0 300.0,197.9 420.0,99.2" fill="none" stroke="#c54d16" stroke-width="2"/>
+<text x="170" y="357" font-family="sans-serif" font-size="11">n inicial</text>
+<text x="510" y="60" font-family="sans-serif" font-size="13">bajas_final</text>
+<path d="M510,75 V315 H870" fill="none" stroke="#333"/>
+<text x="502" y="319.0" text-anchor="end" font-family="sans-serif" font-size="10">0.01</text>
+<text x="502" y="239.0" text-anchor="end" font-family="sans-serif" font-size="10">0.05</text>
+<text x="502" y="159.0" text-anchor="end" font-family="sans-serif" font-size="10">0.21</text>
+<text x="502" y="79.0" text-anchor="end" font-family="sans-serif" font-size="10">0.85</text>
+<text x="510.0" y="333" text-anchor="middle" font-family="sans-serif" font-size="10">1000</text>
+<text x="630.0" y="333" text-anchor="middle" font-family="sans-serif" font-size="10">5000</text>
+<text x="750.0" y="333" text-anchor="middle" font-family="sans-serif" font-size="10">10000</text>
+<text x="870.0" y="333" text-anchor="middle" font-family="sans-serif" font-size="10">50000</text>
+<polyline points="510.0,132.9 630.0,116.1 750.0,115.0 870.0,101.3" fill="none" stroke="#1565c0" stroke-width="2"/>
+<polyline points="510.0,288.7 630.0,287.6 750.0,288.7 870.0,274.2" fill="none" stroke="#c54d16" stroke-width="2"/>
+<text x="620" y="357" font-family="sans-serif" font-size="11">n inicial</text>
+<text x="80" y="375" font-family="sans-serif" font-size="12" fill="#1565c0">Azul: AVL</text>
+<text x="210" y="375" font-family="sans-serif" font-size="12" fill="#c54d16">Naranja: lista ordenada</text></svg>
