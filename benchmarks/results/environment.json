@@ -1,0 +1,11 @@
+{
+  "python": "3.13.9",
+  "implementation": "CPython",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "processor": "Intel64 Family 6 Model 142 Stepping 12, GenuineIntel",
+  "cpu_count": 8,
+  "run_utc": "2026-11-27T19:06:31+00:00",
+  "repeats": 3,
+  "seed": 20261127,
+  "quick": false
+}
