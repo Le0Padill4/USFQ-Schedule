@@ -2,13 +2,17 @@
 
 from __future__ import annotations
 
-from .generation import generate_backtracking, generate_exhaustive
+from .generation import generate_backtracking, generate_csp, generate_exhaustive
 from .models import EligibleCourse
 from .request import ScheduleRequest, build_problem
 from .scoring import ScheduleResult, score_schedule
 from .topk import top_k_heap, top_k_sort
 
-GENERATORS = {"exhaustive": generate_exhaustive, "backtracking": generate_backtracking}
+GENERATORS = {
+    "exhaustive": generate_exhaustive,
+    "backtracking": generate_backtracking,
+    "csp": generate_csp,
+}
 SELECTORS = {"heap": top_k_heap, "sort": top_k_sort}
 
 

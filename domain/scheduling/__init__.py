@@ -2,7 +2,7 @@
 
 from .engine import GENERATORS, SELECTORS, generate_schedules
 from .errors import ErrorCode, ScheduleError
-from .generation import Stats, generate_backtracking, generate_exhaustive
+from .generation import Stats, generate_backtracking, generate_csp, generate_exhaustive
 from .models import (
     DAYS_PER_WEEK,
     MINUTES_PER_DAY,
@@ -46,6 +46,7 @@ __all__ = [
     "Stats",
     "build_problem",
     "generate_backtracking",
+    "generate_csp",
     "generate_exhaustive",
     "generate_schedules",
     "meetings_overlap",

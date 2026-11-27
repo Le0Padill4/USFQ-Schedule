@@ -12,11 +12,16 @@ from domain.scheduling import (
     Stats,
     build_problem,
     generate_backtracking,
+    generate_csp,
     generate_exhaustive,
 )
 from synthetic import CatalogParams, eligible_courses, generate_catalog, tiny_catalog
 
-CANDIDATES = {"exhaustive": generate_exhaustive, "backtracking": generate_backtracking}
+CANDIDATES = {
+    "exhaustive": generate_exhaustive,
+    "backtracking": generate_backtracking,
+    "csp": generate_csp,
+}
 
 
 def req(**kw):
@@ -34,7 +39,8 @@ class GenerationCase(unittest.TestCase):
         """Ejecuta ambos candidatos y exige resultados identicos."""
         problem = build_problem(request, eligible if eligible is not None else self.eligible)
         results = {name: fn(problem) for name, fn in CANDIDATES.items()}
-        self.assertEqual(results["exhaustive"], results["backtracking"])
+        for name, got in results.items():
+            self.assertEqual(got, results["exhaustive"], name)
         return results["exhaustive"]
 
     def assertCode(self, code, request, eligible=None):
@@ -145,6 +151,15 @@ class ErrorTests(GenerationCase):
 
 
 class StatsTests(unittest.TestCase):
+    def test_csp_hace_menos_comparaciones_de_cruce_que_backtracking(self):
+        cat = generate_catalog(CatalogParams(seed=11, slot_pool=10, sections=(3, 3), offered_prob=1.0))
+        el = eligible_courses(cat, "1CMP", set())
+        courses = tuple(e.course_code for e in el[:4])
+        problem = build_problem(req(required_courses=courses, max_results=5), el)
+        bt, cs = Stats(), Stats()
+        self.assertEqual(generate_backtracking(problem, bt), generate_csp(problem, cs))
+        self.assertLess(cs.conflict_checks, bt.conflict_checks)
+
     def test_backtracking_visita_menos_nodos_con_muchos_cruces(self):
         cat = generate_catalog(CatalogParams(seed=11, slot_pool=4, sections=(3, 3), offered_prob=1.0))
         el = eligible_courses(cat, "1CMP", set())

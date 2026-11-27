@@ -94,3 +94,57 @@ def generate_backtracking(problem: Problem, stats: Stats | None = None) -> list[
     rec(0, 0)
     out.sort()
     return out
+
+
+def generate_csp(problem: Problem, stats: Stats | None = None) -> list[tuple[str, ...]]:
+    """Candidato C: CSP con forward checking y orden MRV (variable de menor dominio).
+
+    Cada materia es una variable cuyo dominio son sus paralelos (mas ``None`` si es opcional).
+    Al asignar un paralelo se filtran los dominios de las materias aun sin asignar; si el
+    dominio de una requerida queda vacio, se corta la rama. Mismo problema y misma salida
+    que los otros candidatos.
+    """
+    st = stats if stats is not None else Stats()
+    slots = problem.slots
+    n = len(slots)
+    out: list[tuple[str, ...]] = []
+    chosen: list[Offering] = []
+    credits_of = [s.credits for s in slots]
+
+    def rec(domains: list[list[Offering] | None], unassigned: list[int], credits: int) -> None:
+        st.nodes += 1
+        if credits + sum(credits_of[i] for i in unassigned) < problem.min_credits:
+            return
+        if not unassigned:
+            if chosen:
+                out.append(tuple(sorted(o.nrc for o in chosen)))
+            return
+        var = min(unassigned, key=lambda i: (len(domains[i]), i))  # MRV
+        rest = [i for i in unassigned if i != var]
+        slot = slots[var]
+        for off in domains[var]:
+            if problem.max_credits is not None and credits + slot.credits > problem.max_credits:
+                continue
+            new_domains = list(domains)
+            dead = False
+            for j in rest:
+                kept = []
+                for cand in domains[j]:
+                    st.conflict_checks += 1
+                    if not offerings_conflict(off, cand):
+                        kept.append(cand)
+                new_domains[j] = kept
+                if not kept and not slots[j].optional:
+                    dead = True
+                    break
+            if dead:
+                continue
+            chosen.append(off)
+            rec(new_domains, rest, credits + slot.credits)
+            chosen.pop()
+        if slot.optional:
+            rec(domains, rest, credits)
+
+    rec([list(s.options) for s in slots], list(range(n)), 0)
+    out.sort()
+    return out
