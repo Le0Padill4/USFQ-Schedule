@@ -106,7 +106,7 @@ class ScoringTests(unittest.TestCase):
     def test_los_cuatro_pipelines_coinciden(self):
         r = req(preferences=Preferences(free_day=1, minimize_days=True))
         outs = [generate_schedules(r, self.el, generator=g, selector=s)
-                for g in ("exhaustive", "backtracking") for s in ("heap", "sort")]
+                for g in ("exhaustive", "backtracking", "csp") for s in ("heap", "sort")]
         self.assertTrue(all(o == outs[0] for o in outs))
 
 

@@ -10,6 +10,7 @@ from domain.scheduling import (
     ScheduleError,
     build_problem,
     generate_backtracking,
+    generate_csp,
     generate_exhaustive,
     generate_schedules,
 )
@@ -38,8 +39,9 @@ class DifferentialTests(unittest.TestCase):
                     problem = build_problem(request, eligible)
                     self.assertEqual(generate_exhaustive(problem), ref)
                     self.assertEqual(generate_backtracking(problem), ref)
+                    self.assertEqual(generate_csp(problem), ref)
                     expected = reference_schedules(request, eligible)
-                    for g in ("exhaustive", "backtracking"):
+                    for g in ("exhaustive", "backtracking", "csp"):
                         for s in ("heap", "sort"):
                             self.assertEqual(
                                 generate_schedules(request, eligible, generator=g, selector=s),
