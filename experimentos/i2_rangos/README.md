@@ -34,3 +34,9 @@ referencia; la igualdad completa de las respuestas se comprueba durante la corri
 Este es **un** experimento de operación, no los dos benchmarks del motor completo
 ni evidencia de que se cumpla toda la rúbrica. Requiere revisión y coordinación
 con I3 sobre escenarios globales, estructura compartida y reporte final.
+
+La inserción aquí forma parte de la carga mixta y del costo de mantenimiento:
+no se ha medido por separado ni debe contarse como una segunda operación
+medida. Para que la consulta de rango cuente en la entrega, el motor integrado
+debe exponerla como operación real y el informe debe justificar sus candidatos
+y escenarios; este experimento aislado no demuestra esas condiciones.

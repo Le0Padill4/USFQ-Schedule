@@ -26,6 +26,9 @@ O(log n) pero desplaza hasta O(n) elementos, salvo al retirar al final. Las
 constantes de Python influyen. Los resultados son de esta máquina y no prueban
 un patrón real de oferta ni extrapolan a todos los tamaños.
 
-Es una segunda operación medida de componentes aislados, junto con rangos en
-`experimentos/i2_rangos/`; no demuestra las mediciones del motor integrado ni
-sustituye el acuerdo de escenarios, costos compartidos y análisis del equipo.
+La baja es distinta de la consulta de rango, pero esta medición aislada solo
+puede contar como segunda operación evaluable si el motor integrado ofrece una
+baja real con este contrato y el informe justifica ambos candidatos y sus
+escenarios. También debe contabilizarse la actualización de todas las demás
+estructuras que compartan esos datos. Hasta verificarlo, no se declara cumplido
+el requisito de dos operaciones medidas del motor completo.
