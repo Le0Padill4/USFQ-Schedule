@@ -1,0 +1,17 @@
+escenario,n,candidato,bajas,repeticiones,mediana_ms,restantes
+bajas_inicio,1000,avl,200,5,0.2831,800
+bajas_inicio,1000,lista_ordenada,200,5,0.0295,800
+bajas_inicio,5000,avl,200,5,0.3515,4800
+bajas_inicio,5000,lista_ordenada,200,5,0.0835,4800
+bajas_inicio,10000,avl,200,5,0.4758,9800
+bajas_inicio,10000,lista_ordenada,200,5,0.1724,9800
+bajas_inicio,50000,avl,200,5,0.5120,49800
+bajas_inicio,50000,lista_ordenada,200,5,1.1230,49800
+bajas_final,1000,avl,200,5,0.3076,800
+bajas_final,1000,lista_ordenada,200,5,0.0200,800
+bajas_final,5000,avl,200,5,0.4127,4800
+bajas_final,5000,lista_ordenada,200,5,0.0204,4800
+bajas_final,10000,avl,200,5,0.4204,9800
+bajas_final,10000,lista_ordenada,200,5,0.0200,9800
+bajas_final,50000,avl,200,5,0.5352,49800
+bajas_final,50000,lista_ordenada,200,5,0.0258,49800

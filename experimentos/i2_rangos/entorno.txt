@@ -1,0 +1,3 @@
+Python 3.13.13
+Darwin arm64
+Semilla 20261125; 3 repeticiones por punto.
