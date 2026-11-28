@@ -1,0 +1,34 @@
+name: Python tests for all contributors
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  python-all:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Install optional module dependencies
+        run: |
+          if [ -f requirements-i2-mcp.txt ]; then
+            python -m pip install -r requirements-i2-mcp.txt
+            python -m pip check
+          elif [ -f requirements-i2-api.txt ]; then
+            python -m pip install -r requirements-i2-api.txt
+            python -m pip check
+          fi
+      - name: Run all Python unittest suites
+        run: |
+          if [ -d tests ]; then
+            python -m unittest discover -s tests -p 'test*.py' -v
+          else
+            echo 'No tests directory exists in this revision.'
+          fi
