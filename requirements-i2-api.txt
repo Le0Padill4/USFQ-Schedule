@@ -1,0 +1,4 @@
+# Tested locally with Python 3.13. This is not yet a locked transitive set.
+fastapi==0.141.1
+uvicorn==0.53.0
+httpx==0.28.1
